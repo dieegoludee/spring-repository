@@ -8,13 +8,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.diego.springboot.ioc.app.springbootioc.models.Product;
-import com.diego.springboot.ioc.app.springbootioc.services.ProductService;
+import com.diego.springboot.ioc.app.springbootioc.services.ProductServiceImpl;
 
 @RestController
 @RequestMapping("/api")
 public class SomeController {
 
-  private ProductService service = new ProductService();
+  private ProductServiceImpl service = new ProductServiceImpl();
 
   @GetMapping()
   public List<Product> list() {

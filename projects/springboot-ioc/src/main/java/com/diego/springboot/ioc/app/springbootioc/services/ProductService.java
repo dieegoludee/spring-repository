@@ -1,28 +1,12 @@
 package com.diego.springboot.ioc.app.springbootioc.services;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import com.diego.springboot.ioc.app.springbootioc.models.Product;
-import com.diego.springboot.ioc.app.springbootioc.repositories.ProductRepository;
 
-public class ProductService {
+public interface ProductService {
 
-  private ProductRepository repository = new ProductRepository();
+  List<Product> findAll();
 
-  public List<Product> findAll() {
-    return repository.findAll().stream().map(p -> {
-      Double priceTax = p.getPrice() * 1.25d;
-      // Para evitar la mutabilidad del objeto, clonamos o creamos una nueva instancia
-      // del objeto
-      Product newProd = (Product) p.clone();
-      newProd.setPrice(priceTax.longValue());
-      return newProd;
-    }).collect(Collectors.toList());
-  }
-
-  public Product findById(Long id) {
-    return repository.findById(id);
-  }
-
+  Product findById(Long id);
 }
