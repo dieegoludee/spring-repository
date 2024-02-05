@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title th:text="${title}">Document</title>
+</head>
+
+<body>
+  <h1 th:text="${title}"></h1>
+  <ul>
+    <li th:text="${user.name}"></li>
+    <li th:text="${user.lastname}"></li>
+    <li th:if="${user.email}" th:text="${user.email}"></li>
+    <li th:if="${user.email == null}" th:text="${'No tiene email'}"></li>
+  </ul>
+
+  <a th:href="@{/list}">
+    Ver listado
+  </a>
+  <br/>
+  <a th:href="@{'/api/params/foo?message=' + ${title}}">
+    Ver API params foo
+  </a>
+  <br/>
+  <a th:href="@{/api/params/foo(message='Otra forma de pasar los datos')}">
+    Ver API params foo 2
+  </a>
+  <br/>
+  <a th:href="@{/api/params/bar(text='Otra forma de pasar los datos', code=1234)}">
+    Ver API params mix bar
+  </a>
+  <br/>
+  <a th:href="@{/api/var/baz/Spring Boot y Spring Framework}">
+    Ver API var baz path variable
+  </a>
+  <br/>
+  <a th:href="@{'/api/var/baz/' + ${title}}">
+    Ver API var baz path variable 2
+  </a>
+</body>
+
+</html>
