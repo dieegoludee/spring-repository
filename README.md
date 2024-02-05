@@ -5,7 +5,7 @@
 
 ***En el directorio `/projects` están todos los proyectos de Spring***
 
-| Número  | Proyecto | Código | Visitar |
-| ------------- | ------------- | ------------- | ------------- |
-| `01`  | Introducción Spring Boot 3 - Spring MVC  | [Ver]()  | [Visitar]()  |
-| `02`  | Spring Boot 3 - IoC  | [Ver]()  | [Visitar]()  |
+| Número  | Proyecto | Código |
+| ------------- | ------------- | ------------- |
+| `01`  | Introducción Spring Boot 3 - Spring MVC  | [Ver](https://github.com/dieegoludee/spring-repository/tree/main/projects/springboot-web)  |
+| `02`  | Spring Boot 3 - IoC  | [Ver]()  |
