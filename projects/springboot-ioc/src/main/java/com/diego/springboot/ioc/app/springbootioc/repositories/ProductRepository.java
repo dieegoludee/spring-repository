@@ -20,4 +20,10 @@ public class ProductRepository {
   public List<Product> findAll() {
     return data;
   }
+
+  public Product findById(Long id) {
+    // retorna el objeto Product si la expresión lambda es true.
+    // con el .orElse(null) devuelve el objeto si lo encuentra, sino devuelve null
+    return data.stream().filter(p -> p.getId().equals(id)).findFirst().orElse(null);
+  }
 }
