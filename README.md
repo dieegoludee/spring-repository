@@ -8,4 +8,4 @@
 | Número  | Proyecto | Código |
 | ------------- | ------------- | ------------- |
 | `01`  | Introducción Spring Boot 3 - Spring MVC  | [Ver](https://github.com/dieegoludee/spring-repository/tree/main/projects/springboot-web)  |
-| `02`  | Spring Boot 3 - IoC  | [Ver](https://github.com/dieegoludee/spring-repository/tree/main/projects/springboot-ioc)  |
+| `02`  | Spring Boot 3 - Inyección de Dependencias  | [Ver](https://github.com/dieegoludee/spring-repository/tree/main/projects/springboot-ioc)  |
