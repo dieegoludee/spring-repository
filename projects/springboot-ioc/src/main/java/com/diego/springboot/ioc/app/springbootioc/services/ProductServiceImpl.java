@@ -3,12 +3,22 @@ package com.diego.springboot.ioc.app.springbootioc.services;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.diego.springboot.ioc.app.springbootioc.models.Product;
-import com.diego.springboot.ioc.app.springbootioc.repositories.ProductRepositoryImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import com.diego.springboot.ioc.app.springbootioc.models.Product;
+import com.diego.springboot.ioc.app.springbootioc.repositories.ProductRepository;
+
+@Service
 public class ProductServiceImpl implements ProductService {
 
-  private ProductRepositoryImpl repository = new ProductRepositoryImpl();
+  @Autowired
+  private ProductRepository repository;
+
+  // Con el constructor no hace falta poner la anotación @Autowired
+  // public ProductServiceImpl(ProductRepository repository) {
+  // this.repository = repository;
+  // }
 
   @Override
   public List<Product> findAll() {
@@ -26,5 +36,11 @@ public class ProductServiceImpl implements ProductService {
   public Product findById(Long id) {
     return repository.findById(id);
   }
+
+  // Autowired mediante método Setter (I.D)
+  // @Autowired
+  // public void setRepository(ProductRepository repository) {
+  // this.repository = repository;
+  // }
 
 }
