@@ -3,12 +3,12 @@ package com.diego.springboot.ioc.app.springbootioc.repositories;
 import java.util.Collections;
 import java.util.List;
 
-import org.springframework.context.annotation.Primary;
+// import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
 import com.diego.springboot.ioc.app.springbootioc.models.Product;
 
-@Repository
+@Repository("productFoo")
 public class ProductRepositoryFoo implements ProductRepository {
 
   @Override

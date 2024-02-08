@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.diego.springboot.ioc.app.springbootioc.models.Product;
 
 @Primary // para indicar el bean por defecto que debe utilizar si hay más de 1
-@Repository
+@Repository("productList")
 public class ProductRepositoryImpl implements ProductRepository {
 
   private List<Product> data;
