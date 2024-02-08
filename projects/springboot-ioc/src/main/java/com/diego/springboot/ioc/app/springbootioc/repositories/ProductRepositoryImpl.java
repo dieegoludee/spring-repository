@@ -3,10 +3,12 @@ package com.diego.springboot.ioc.app.springbootioc.repositories;
 import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
 import com.diego.springboot.ioc.app.springbootioc.models.Product;
 
+@Primary // para indicar el bean por defecto que debe utilizar si hay más de 1
 @Repository
 public class ProductRepositoryImpl implements ProductRepository {
 
