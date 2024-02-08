@@ -5,9 +5,15 @@ import java.util.List;
 
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
+// import org.springframework.web.context.annotation.RequestScope;
+// import org.springframework.web.context.annotation.SessionScope;
 
 import com.diego.springboot.ioc.app.springbootioc.models.Product;
 
+// @SessionScope // para que el scope sea por sesión, se muta el valor pero después de cerrarlo
+//               // vuelve al valor original
+// @RequestScope // para que el scope sea por request y no mute, aunque el
+// objeto sea mutable
 @Primary // para indicar el bean por defecto que debe utilizar si hay más de 1
 @Repository("productList")
 public class ProductRepositoryImpl implements ProductRepository {
