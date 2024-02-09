@@ -15,7 +15,8 @@ import jakarta.annotation.PreDestroy;
 
 @Component
 @RequestScope
-@JsonIgnoreProperties({ "targetSource", "advisors" }) // Para omitir las propiedades del Proxy
+// @JsonIgnoreProperties({ "targetSource", "advisors" }) // Para omitir las
+// propiedades del Proxy
 public class Invoice {
 
   @Autowired

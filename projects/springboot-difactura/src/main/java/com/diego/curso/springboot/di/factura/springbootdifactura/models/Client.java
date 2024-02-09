@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Component
 @RequestScope
-@JsonIgnoreProperties({ "targetSource", "advisors" })
+// @JsonIgnoreProperties({ "targetSource", "advisors" })
 public class Client {
 
   @Value("${client.name}")
