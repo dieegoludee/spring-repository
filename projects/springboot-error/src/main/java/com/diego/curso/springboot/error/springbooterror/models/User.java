@@ -43,13 +43,13 @@ public class User {
     this.id = id;
   }
 
-  // public Role getRole() {
-  // return role;
-  // }
-
-  public String getRoleName() {
-    return role.getName();
+  public Role getRole() {
+    return role;
   }
+
+  // public String getRoleName() {
+  // return role.getName();
+  // }
 
   public void setRole(Role role) {
     this.role = role;

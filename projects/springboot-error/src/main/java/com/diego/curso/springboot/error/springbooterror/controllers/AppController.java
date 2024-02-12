@@ -1,5 +1,7 @@
 package com.diego.curso.springboot.error.springbooterror.controllers;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,11 +29,23 @@ public class AppController {
 
   @GetMapping("/show/{id}")
   public User show(@PathVariable(name = "id") Long id) {
-    User user = service.findById(id);
-    if (user == null) {
-      throw new UserNotFoundException("Error: El Usuario no existe!");
-    }
-    System.out.println(user.getName());
+    User user = service.findById(id).orElseThrow(
+        () -> new UserNotFoundException("Error: El Usuario no existe!"));
+
     return user;
   }
+
+  // SE PUEDE HACER DE LAS 2 FORMAS
+
+  // @GetMapping("/show/{id}")
+  // public ResponseEntity<?> show(@PathVariable(name = "id") Long id) {
+  // // User user = service.findById(id).orElseThrow(
+  // // () -> new UserNotFoundException("Error: El Usuario no existe!"));
+
+  // Optional<User> optionalUser = service.findById(id);
+  // if (optionalUser.isEmpty()) {
+  // return ResponseEntity.notFound().build();
+  // }
+  // return ResponseEntity.ok(optionalUser.get());
+  // }
 }
