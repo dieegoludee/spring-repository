@@ -12,3 +12,4 @@
 | `03`  | Spring Boot 3 - Inyección de Dependencias 2 (Facturas)  | [Ver](https://github.com/dieegoludee/spring-repository/tree/main/projects/springboot-difactura)  |
 | `04`  | Spring Boot 3 - Manejo de Excepciones  | [Ver](https://github.com/dieegoludee/spring-repository/tree/main/projects/springboot-error)  |
 | `05`  | Spring Boot 3 - Interceptores HTTP  | [Ver](https://github.com/dieegoludee/spring-repository/tree/main/projects/springboot-interceptor)  |
+| `06`  | Spring Boot 3 - Interceptores HTTP 2 (Horario)  | [Ver](https://github.com/dieegoludee/spring-repository/tree/main/projects/springboot-horario)  |
