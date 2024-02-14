@@ -8,7 +8,7 @@ public class GreetingServiceImpl implements GreetingService {
   @Override
   public String sayHello(String person, String phrase) {
     String greeting = phrase + " " + person;
-    System.out.println(greeting);
+    System.out.println("<---------METHOD-----------> " + greeting.toUpperCase() + " <-----------METHOD--------->");
     return greeting;
   }
 
