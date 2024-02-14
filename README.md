@@ -13,3 +13,4 @@
 | `04`  | Spring Boot 3 - Manejo de Excepciones  | [Ver](https://github.com/dieegoludee/spring-repository/tree/main/projects/springboot-error)  |
 | `05`  | Spring Boot 3 - Interceptores HTTP  | [Ver](https://github.com/dieegoludee/spring-repository/tree/main/projects/springboot-interceptor)  |
 | `06`  | Spring Boot 3 - Interceptores HTTP 2 (Horario)  | [Ver](https://github.com/dieegoludee/spring-repository/tree/main/projects/springboot-horario)  |
+| `07`  | Spring Boot 3 - Programación Orientada a Aspectos (AOP)  | [Ver](https://github.com/dieegoludee/spring-repository/tree/main/projects/springboot-aop)  |
