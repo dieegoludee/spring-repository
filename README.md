@@ -14,3 +14,4 @@
 | `05`  | Spring Boot 3 - Interceptores HTTP  | [Ver](https://github.com/dieegoludee/spring-repository/tree/main/projects/springboot-interceptor)  |
 | `06`  | Spring Boot 3 - Interceptores HTTP 2 (Horario)  | [Ver](https://github.com/dieegoludee/spring-repository/tree/main/projects/springboot-horario)  |
 | `07`  | Spring Boot 3 - Programación Orientada a Aspectos (AOP)  | [Ver](https://github.com/dieegoludee/spring-repository/tree/main/projects/springboot-aop)  |
+| `08`  | Spring Boot 3 - JPA e Hibernate  | [Ver](https://github.com/dieegoludee/spring-repository/tree/main/projects/springboot-jpa)  |
