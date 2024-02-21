@@ -1,12 +1,14 @@
 package com.diego.curso.springboot.jpa.springbootjpa;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.diego.curso.springboot.jpa.springbootjpa.entities.Person;
 // import com.diego.curso.springboot.jpa.springbootjpa.entities.Person;
 import com.diego.curso.springboot.jpa.springbootjpa.repositories.PersonRepository;
 
@@ -23,6 +25,24 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
+		// list();
+		findOne();
+	}
+
+	public void findOne() {
+		// Person person = null;
+		// Optional<Person> optionalPerson = repository.findById(8L);
+		// if (optionalPerson.isPresent())
+		// person = optionalPerson.get();
+
+		// System.out.println(person);
+
+		repository.findById(1L).ifPresent(person -> System.out.println(person));
+		// con la función Lambda simplificada, pero devuelve lo mismo
+		repository.findById(1L).ifPresent(System.out::println);
+	}
+
+	public void list() {
 		// List<Person> persons = (List<Person>) repository.findAll();
 
 		// List<Person> persons = (List<Person>)
