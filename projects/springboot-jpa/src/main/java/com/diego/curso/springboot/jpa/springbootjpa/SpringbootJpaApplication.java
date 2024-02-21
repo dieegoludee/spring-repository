@@ -2,11 +2,13 @@ package com.diego.curso.springboot.jpa.springbootjpa;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Scanner;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.diego.curso.springboot.jpa.springbootjpa.entities.Person;
 // import com.diego.curso.springboot.jpa.springbootjpa.entities.Person;
@@ -26,9 +28,51 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 
 		// list();
-		findOne();
+		// findOne();
+		// create();
+		update();
 	}
 
+	@Transactional
+	public void update() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Ingrese el id de la persona: ");
+		Long id = sc.nextLong();
+
+		Optional<Person> optionalPerson = repository.findById(id);
+		optionalPerson.ifPresent(person -> {
+			System.out.println(person);
+			System.out.println("Ingrese el nuevo nombre: ");
+			String name = sc.next();
+			person.setName(name);
+
+			Person personDb = repository.save(person);
+			System.out.println(personDb);
+		});
+
+		sc.close();
+	}
+
+	@Transactional
+	public void create() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Ingrese el nombre: ");
+		String name = sc.next();
+		System.out.println("Ingrese el apellido: ");
+		String lastname = sc.next();
+		System.out.println("Ingrese el lenguaje de programación: ");
+		String programmingLanguage = sc.next();
+		sc.close();
+
+		// Dejamos el id en null, ya que es auto-increment
+		Person person = new Person(null, name, lastname, programmingLanguage);
+		Person newPerson = repository.save(person);
+
+		System.out.println(newPerson);
+		repository.findById(newPerson.getId()).ifPresent(System.out::println);
+	}
+
+	@Transactional(readOnly = true)
 	public void findOne() {
 		// Person person = null;
 		// Optional<Person> optionalPerson = repository.findById(1L);
@@ -48,6 +92,7 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 		repository.findByNameContaining("ep").ifPresent(System.out::println); // ep para buscar Pepe con like
 	}
 
+	@Transactional(readOnly = true)
 	public void list() {
 		// List<Person> persons = (List<Person>) repository.findAll();
 
