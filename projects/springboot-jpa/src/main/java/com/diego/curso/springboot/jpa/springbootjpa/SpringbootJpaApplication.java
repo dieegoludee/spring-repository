@@ -26,11 +26,44 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-
 		// list();
 		// findOne();
 		// create();
-		update();
+		// update();
+		// delete();
+		deletePerson();
+	}
+
+	@Transactional
+	public void deletePerson() {
+		repository.findAll().forEach(System.out::println);
+
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Ingrese el ID a eliminar: ");
+		Long id = sc.nextLong();
+
+		Optional<Person> optionalPerson = repository.findById(id);
+		// optionalPerson.ifPresentOrElse(person -> repository.delete(person),
+		// () -> System.out.println("No existe la persona con ese id"));
+
+		optionalPerson.ifPresentOrElse(repository::delete,
+				() -> System.out.println("No existe la persona con ese id"));
+
+		repository.findAll().forEach(System.out::println);
+		sc.close();
+	}
+
+	@Transactional
+	public void delete() {
+		repository.findAll().forEach(System.out::println);
+
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Ingrese el ID a eliminar: ");
+		Long id = sc.nextLong();
+		repository.deleteById(id);
+
+		repository.findAll().forEach(System.out::println);
+		sc.close();
 	}
 
 	@Transactional
@@ -40,14 +73,14 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 		Long id = sc.nextLong();
 
 		Optional<Person> optionalPerson = repository.findById(id);
-		optionalPerson.ifPresent(person -> {
-			System.out.println(person);
+		optionalPerson.ifPresent(personDb -> {
+			System.out.println(personDb);
 			System.out.println("Ingrese el nuevo nombre: ");
 			String name = sc.next();
-			person.setName(name);
+			personDb.setName(name);
 
-			Person personDb = repository.save(person);
-			System.out.println(personDb);
+			Person personUpdated = repository.save(personDb);
+			System.out.println(personUpdated);
 		});
 
 		sc.close();
