@@ -31,7 +31,44 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 		// create();
 		// update();
 		// delete();
-		deletePerson();
+		// deletePerson();
+		personalizedQueries();
+	}
+
+	@Transactional(readOnly = true)
+	public void personalizedQueries() {
+		Scanner sc = new Scanner(System.in);
+		System.out
+				.println("============================== Consulta solo el nombre por el id ==============================");
+		System.out.println("Ingrese el ID: ");
+		Long id = sc.nextLong();
+
+		System.out.println("===== mostrando solo el nombre =====");
+		String name = repository.getNameById(id);
+		System.out.println(name);
+
+		System.out.println("===== mostrando solo el id =====");
+		Long idDb = repository.getIdById(id);
+		System.out.println(idDb);
+
+		System.out.println("===== mostrando nombre completo con concat =====");
+		String fullname = repository.getFullNameById(id);
+		System.out.println(fullname);
+
+		System.out.println("===== consulta por campos personalizados por el id =====");
+		Optional<Object> optionalReg = repository.buscarPersonDataById(id);
+		if (optionalReg.isPresent()) {
+			Object[] personReg = (Object[]) optionalReg.orElseThrow();
+			System.out.println("id=" + personReg[0] + ", name=" + personReg[1] + ", lastname=" + personReg[2]
+					+ ", programmingLanguage=" + personReg[3]);
+		}
+
+		System.out.println("===== consulta por campos personalizados lista =====");
+		List<Object[]> regs = repository.buscarPersonDataList();
+		regs.forEach(reg -> System.out.println("id=" + reg[0] + ", name=" + reg[1] + ", lastname=" + reg[2]
+				+ ", programmingLanguage=" + reg[3]));
+
+		sc.close();
 	}
 
 	@Transactional
