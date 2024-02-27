@@ -10,6 +10,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.diego.curso.springboot.jpa.springbootjpa.dto.PersonDto;
 import com.diego.curso.springboot.jpa.springbootjpa.entities.Person;
 // import com.diego.curso.springboot.jpa.springbootjpa.entities.Person;
 import com.diego.curso.springboot.jpa.springbootjpa.repositories.PersonRepository;
@@ -32,7 +33,28 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 		// update();
 		// delete();
 		// deletePerson();
-		personalizedQueries();
+		// personalizedQueries();
+		personalizedQueries2();
+	}
+
+	@Transactional(readOnly = true)
+	public void personalizedQueries2() {
+		System.out
+				.println(
+						"============================== Consulta por objeto persona y lenguaje de programación ==============================");
+		List<Object[]> personsRegs = repository.findAllMixPerson();
+
+		personsRegs.forEach(reg -> {
+			System.out.println("programmingLanguage=" + reg[1] + ", person=" + reg[0]);
+		});
+
+		System.out.println("Consulta que puebla y devuelve objeto entity de una instancia personalizada");
+		List<Person> persons = repository.findAllObjectPersonPersonalized();
+		persons.forEach(System.out::println);
+
+		System.out.println("Consulta que puebla y devuelve objeto dto de una instancia personalizada");
+		List<PersonDto> personsDto = repository.findAllPersonDto();
+		personsDto.forEach(System.out::println);
 	}
 
 	@Transactional(readOnly = true)
