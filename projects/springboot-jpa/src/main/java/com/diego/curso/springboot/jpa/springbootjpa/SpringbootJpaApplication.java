@@ -34,7 +34,49 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 		// delete();
 		// deletePerson();
 		// personalizedQueries();
-		personalizedQueries2();
+		// personalizedQueries2();
+		// personalizedQueriesDistinct();
+		personalizedQueriesConcatUpperAndLowerCase();
+	}
+
+	@Transactional(readOnly = true)
+	public void personalizedQueriesConcatUpperAndLowerCase() {
+		System.out.println("=============== Consultas con nombres y apellidos de personas ===============");
+		List<String> names = repository.findAllFullNameConcat();
+		names.forEach(System.out::println);
+
+		System.out.println("=============== Consultas con nombres y apellidos de personas Lower ===============");
+		names = repository.findAllFullNameConcatLower();
+		names.forEach(System.out::println);
+
+		System.out.println("=============== Consultas con nombres y apellidos de personas Upper ===============");
+		names = repository.findAllFullNameConcatUpper();
+		names.forEach(System.out::println);
+
+		System.out.println("=============== Consultas personalizada persona upper y lower case ===============");
+		List<Object[]> personReg = repository.getPersonDataListCase();
+		personReg.forEach(
+				person -> System.out.println("id=" + person[0] + ", name=" + person[1] + ", lastname=" + person[2]
+						+ ", programmingLanguage=" + person[3]));
+	}
+
+	@Transactional(readOnly = true)
+	public void personalizedQueriesDistinct() {
+		System.out.println("=============== Consultas con nombres de personas sin Distinct ===============");
+		List<String> names = repository.findAllNames();
+		names.forEach(System.out::println);
+
+		System.out.println("=============== Consultas con nombres de personas con Distinct ===============");
+		names = repository.findAllNamesDistinct();
+		names.forEach(System.out::println);
+
+		System.out.println("=============== Consultas con nombres de lenguajes con Distinct ===============");
+		List<String> languages = repository.findAllLanguagesDistinct();
+		languages.forEach(System.out::println);
+
+		System.out.println("=============== Consulta con número de lenguajes con Distinct y Count ===============");
+		Long languagesCount = repository.findAllLanguagesDistinctCount();
+		System.out.println(languagesCount + " lenguajes diferentes totales");
 	}
 
 	@Transactional(readOnly = true)
