@@ -43,11 +43,13 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 	@Transactional(readOnly = true)
 	public void personalizedQueriesBetween() {
 		System.out.println("=============== Consulta personalizada con between ID ===============");
-		List<Person> persons = repository.findAllBetweenId();
+		// List<Person> persons = repository.findAllBetweenId(2, 5);
+		List<Person> persons = repository.findByIdBetween(2L, 5L); // método sin anotación Query
 		persons.forEach(System.out::println);
 
 		System.out.println("=============== Consulta personalizada con between NAME ===============");
-		persons = repository.findAllBetweenName();
+		// persons = repository.findAllBetweenName("J", "Q");
+		persons = repository.findByNameBetween("J", "Q"); // método sin anotación Query
 		persons.forEach(System.out::println);
 	}
 
