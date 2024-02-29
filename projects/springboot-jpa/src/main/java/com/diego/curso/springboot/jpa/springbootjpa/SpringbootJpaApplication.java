@@ -37,19 +37,39 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 		// personalizedQueries2();
 		// personalizedQueriesDistinct();
 		// personalizedQueriesConcatUpperAndLowerCase();
-		personalizedQueriesBetween();
+		// personalizedQueriesBetween();
+		queriesFunctionAggregation();
+	}
+
+	@Transactional(readOnly = true)
+	public void queriesFunctionAggregation() {
+		System.out.println("=============== Consulta total de registros de la tabla ===============");
+		Long count = repository.getTotalPersons();
+		System.out.println("Total persons: " + count);
+
+		System.out.println("=============== Consulta con el valor mínimo del ID ===============");
+		Long min = repository.getMinId();
+		System.out.println("Min ID person: " + min);
+
+		System.out.println("=============== Consulta con el valor máximo del ID ===============");
+		Long max = repository.getMaxId();
+		System.out.println("Max ID person: " + max);
 	}
 
 	@Transactional(readOnly = true)
 	public void personalizedQueriesBetween() {
 		System.out.println("=============== Consulta personalizada con between ID ===============");
-		// List<Person> persons = repository.findAllBetweenId(2, 5);
-		List<Person> persons = repository.findByIdBetween(2L, 5L); // método sin anotación Query
+		// List<Person> persons = repository.findAllBetweenId(2L, 5L);
+		List<Person> persons = repository.findByIdBetweenOrderByNameAsc(2L, 5L); // método sin anotación Query
 		persons.forEach(System.out::println);
 
 		System.out.println("=============== Consulta personalizada con between NAME ===============");
 		// persons = repository.findAllBetweenName("J", "Q");
-		persons = repository.findByNameBetween("J", "Q"); // método sin anotación Query
+		persons = repository.findByNameBetweenOrderByNameDescLastnameAsc("J", "Q"); // método sin anotación Query
+		persons.forEach(System.out::println);
+
+		System.out.println("=============== Consulta personalizada con order by NAME ===============");
+		persons = repository.findAllByOrderByNameAscLastnameDesc();
 		persons.forEach(System.out::println);
 	}
 

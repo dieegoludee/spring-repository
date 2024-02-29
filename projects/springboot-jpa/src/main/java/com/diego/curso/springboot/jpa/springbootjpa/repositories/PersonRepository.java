@@ -11,15 +11,29 @@ import com.diego.curso.springboot.jpa.springbootjpa.entities.Person;
 
 public interface PersonRepository extends CrudRepository<Person, Long> {
 
-  List<Person> findByIdBetween(Long id1, Long id2); // método sin anotación Query
+  @Query("select count(p) from Person p")
+  Long getTotalPersons();
 
-  List<Person> findByNameBetween(String name1, String name2); // método sin anotación Query
+  @Query("select min(p.id) from Person p")
+  Long getMinId();
 
-  @Query("select p from Person p where p.name between ?1 and ?2")
+  @Query("select max(p.id) from Person p")
+  Long getMaxId();
+
+  List<Person> findAllByOrderByNameAscLastnameDesc(); // método sin anotación Query
+
+  @Query("select p from Person p order by p.name, p.lastname desc")
+  List<Person> getAllOrderedList();
+
+  List<Person> findByIdBetweenOrderByNameAsc(Long id1, Long id2); // método sin anotación Query
+
+  List<Person> findByNameBetweenOrderByNameDescLastnameAsc(String name1, String name2); // método sin anotación Query
+
+  @Query("select p from Person p where p.id between ?1 and ?2 order by p.name desc")
+  List<Person> findAllBetweenId(Long id1, Long id2);
+
+  @Query("select p from Person p where p.name between ?1 and ?2 order by p.name, p.lastname asc")
   List<Person> findAllBetweenName(String name1, String name2);
-
-  @Query("select p from Person p where p.id between ?1 and ?2")
-  List<Person> findAllBetweenId(Integer id1, Integer id2);
 
   @Query("select p.id, upper(p.name), lower(p.lastname), upper(p.programmingLanguage) from Person p")
   List<Object[]> getPersonDataListCase();
