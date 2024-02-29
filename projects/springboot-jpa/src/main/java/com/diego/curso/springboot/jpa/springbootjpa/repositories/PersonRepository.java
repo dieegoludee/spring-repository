@@ -11,6 +11,15 @@ import com.diego.curso.springboot.jpa.springbootjpa.entities.Person;
 
 public interface PersonRepository extends CrudRepository<Person, Long> {
 
+  @Query("select min(length(p.name)) from Person p")
+  Integer getMinLengthName();
+
+  @Query("select max(length(p.name)) from Person p")
+  Integer getMaxLengthName();
+
+  @Query("select p.name, length(p.name) from Person p")
+  List<Object[]> getPersonNameLength();
+
   @Query("select count(p) from Person p")
   Long getTotalPersons();
 
