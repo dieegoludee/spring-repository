@@ -38,7 +38,23 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 		// personalizedQueriesDistinct();
 		// personalizedQueriesConcatUpperAndLowerCase();
 		// personalizedQueriesBetween();
-		queriesFunctionAggregation();
+		// queriesFunctionAggregation();
+		subQueries();
+	}
+
+	@Transactional(readOnly = true)
+	public void subQueries() {
+		System.out.println("=============== Consulta por el nombre más corto y su length ===============");
+		List<Object[]> registers = repository.getShorterName();
+		registers.forEach(reg -> System.out.println("Name: " + reg[0] + " - Length: " + reg[1]));
+
+		System.out.println("=============== Consulta por el nombre más largo y su length ===============");
+		registers = repository.getMaxName();
+		registers.forEach(reg -> System.out.println("Name: " + reg[0] + " - Length: " + reg[1]));
+
+		System.out.println("=============== Consulta por el último campo registrado ===============");
+		Optional<Person> optionalPerson = repository.getLastRegistration();
+		optionalPerson.ifPresent(System.out::println);
 	}
 
 	@Transactional(readOnly = true)
@@ -66,6 +82,14 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 		System.out.println("=============== Consulta con el nombre mas largo ===============");
 		Integer maxLengthName = repository.getMaxLengthName();
 		System.out.println("Nombre más largo: " + maxLengthName);
+
+		System.out.println(
+				"=============== Consultas resumen de funciones de agregación (min, max, sum, avg, count) ===============");
+		Object[] resumeReg = (Object[]) repository.getResumeAggregationFunction();
+		System.out.println("minId= " + resumeReg[0] + ", maxId= " + resumeReg[1] + ", sumId= " + resumeReg[2]
+				+ ", avgLengthName= " + resumeReg[3]
+				+ ", countId= " + resumeReg[4]);
+
 	}
 
 	@Transactional(readOnly = true)
