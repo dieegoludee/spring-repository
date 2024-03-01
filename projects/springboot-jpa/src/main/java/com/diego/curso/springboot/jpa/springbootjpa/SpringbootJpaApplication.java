@@ -31,7 +31,7 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 		// list();
 		// findOne();
 		// create();
-		// update();
+		update();
 		// delete();
 		// deletePerson();
 		// personalizedQueries();
@@ -41,7 +41,7 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 		// personalizedQueriesBetween();
 		// queriesFunctionAggregation();
 		// subQueries();
-		whereIn();
+		// whereIn();
 	}
 
 	@Transactional(readOnly = true)
@@ -255,9 +255,9 @@ public class SpringbootJpaApplication implements CommandLineRunner {
 		Optional<Person> optionalPerson = repository.findById(id);
 		optionalPerson.ifPresent(personDb -> {
 			System.out.println(personDb);
-			System.out.println("Ingrese el nuevo nombre: ");
-			String name = sc.next();
-			personDb.setName(name);
+			System.out.println("Ingrese el nuevo lenguaje: ");
+			String programmingLanguage = sc.next();
+			personDb.setProgrammingLanguage(programmingLanguage);
 
 			Person personUpdated = repository.save(personDb);
 			System.out.println(personUpdated);
