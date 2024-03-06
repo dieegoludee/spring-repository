@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.diego.curso.springboot.jpa.springbootjparelationship.entities.Address;
 import com.diego.curso.springboot.jpa.springbootjparelationship.entities.Client;
 import com.diego.curso.springboot.jpa.springbootjparelationship.entities.Invoice;
 import com.diego.curso.springboot.jpa.springbootjparelationship.repositories.ClientRepository;
@@ -28,9 +30,26 @@ public class SpringbootJpaRelationshipApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		// manyToOneCreate();
-		manyToOneFindByIdClient();
+		// manyToOneFindByIdClient();
+		oneToManyCreate();
 	}
 
+	@Transactional
+	public void oneToManyCreate() {
+		Client client = new Client("Fran", "Moras");
+
+		Address address1 = new Address("El Verjel", 1234);
+		Address address2 = new Address("Vasco de Gama", 9875);
+
+		client.getAddresses().add(address1);
+		client.getAddresses().add(address2);
+
+		clientRepository.save(client);
+		System.out.println(client);
+
+	}
+
+	@Transactional
 	public void manyToOneCreate() {
 		Client client = new Client("John", "Doe");
 		clientRepository.save(client);
@@ -41,6 +60,7 @@ public class SpringbootJpaRelationshipApplication implements CommandLineRunner {
 		System.out.println(invoiceDB);
 	}
 
+	@Transactional
 	public void manyToOneFindByIdClient() {
 		Optional<Client> optionalClient = clientRepository.findById(1L);
 
