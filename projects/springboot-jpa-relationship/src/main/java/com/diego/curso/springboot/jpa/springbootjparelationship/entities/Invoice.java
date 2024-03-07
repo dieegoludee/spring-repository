@@ -66,7 +66,7 @@ public class Invoice {
 
   @Override
   public String toString() {
-    return "Invoice {id=" + id + ", description=" + description + ", total=" + total + ", client=" + client + "}";
+    return "Invoice {id=" + id + ", description=" + description + ", total=" + total + "}";
   }
 
 }

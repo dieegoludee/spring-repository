@@ -31,8 +31,12 @@ public class Client {
       "id_direcciones" }))
   private List<Address> addresses;
 
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "client")
+  private List<Invoice> invoices;
+
   public Client() {
     addresses = new ArrayList<>();
+    invoices = new ArrayList<>();
   }
 
   public Client(String name, String lastname) {
@@ -73,9 +77,28 @@ public class Client {
     this.addresses = addresses;
   }
 
+  public List<Invoice> getInvoices() {
+    return invoices;
+  }
+
+  public void setInvoices(List<Invoice> invoices) {
+    this.invoices = invoices;
+  }
+
+  public Client addInvoice(Invoice invoice) {
+    invoices.add(invoice);
+    // Al ser bidireccional hay que pasar a la factura el cliente
+    invoice.setClient(this); // con this hacemos referencia a la propia instancia de la clase
+    return this; // para encadenar devolvemos el mismo objeto y asi optimizamos el método
+  }
+
   @Override
   public String toString() {
-    return "Client {id=" + id + ", name=" + name + ", lastname=" + lastname + ", addresses=" + addresses + "}";
+    return "Client {id=" + id +
+        ", name=" + name +
+        ", lastname=" + lastname +
+        ", invoices=" + invoices +
+        ", addresses=" + addresses + "}";
   }
 
 }

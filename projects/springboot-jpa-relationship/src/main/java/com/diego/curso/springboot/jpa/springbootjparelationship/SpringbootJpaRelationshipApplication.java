@@ -37,7 +37,27 @@ public class SpringbootJpaRelationshipApplication implements CommandLineRunner {
 		// oneToManyCreate();
 		// oneToManyFindByIdClient();
 		// removeAddress();
-		removeAddressFindById();
+		// removeAddressFindById();
+		oneToManyInvoiceBidireccional();
+	}
+
+	@Transactional
+	public void oneToManyInvoiceBidireccional() {
+		Client client = new Client("Fran", "Moras");
+
+		Invoice invoice1 = new Invoice("Compras de la casa", 5000L);
+		Invoice invoice2 = new Invoice("Compras de la oficina", 8000L);
+
+		// client.setInvoices(Arrays.asList(invoice1, invoice2));
+		// // Al ser bidireccional hay que pasar a la factura el cliente
+		// invoice1.setClient(client);
+		// invoice2.setClient(client);
+		// Hace lo mismo, pero queda más limpio y optimizado
+		client.addInvoice(invoice1).addInvoice(invoice2);
+
+		clientRepository.save(client);
+		System.out.println();
+
 	}
 
 	@Transactional
