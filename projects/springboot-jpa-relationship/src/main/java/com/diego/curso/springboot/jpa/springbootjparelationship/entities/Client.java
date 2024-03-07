@@ -94,6 +94,11 @@ public class Client {
     return this; // para encadenar devolvemos el mismo objeto y asi optimizamos el método
   }
 
+  public void removeInvoice(Invoice invoice) {
+    this.getInvoices().remove(invoice);
+    invoice.setClient(null); // null para borrar el cliente
+  }
+
   @Override
   public String toString() {
     return "Client {id=" + id +
