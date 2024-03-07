@@ -1,9 +1,12 @@
 package com.diego.curso.springboot.jpa.springbootjparelationship;
 
 // import java.util.ArrayList;
-import java.util.Arrays;
+// import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
 // import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -38,7 +41,22 @@ public class SpringbootJpaRelationshipApplication implements CommandLineRunner {
 		// oneToManyFindByIdClient();
 		// removeAddress();
 		// removeAddressFindById();
-		oneToManyInvoiceBidireccional();
+		// oneToManyInvoiceBidireccional();
+		oneToManyInvoiceBidireccionalFindById();
+	}
+
+	@Transactional
+	public void oneToManyInvoiceBidireccionalFindById() {
+		Optional<Client> optionalClient = clientRepository.findOne(1L);
+		optionalClient.ifPresent(client -> {
+			Invoice invoice1 = new Invoice("Compras de la casa", 5000L);
+			Invoice invoice2 = new Invoice("Compras de la oficina", 8000L);
+
+			client.addInvoice(invoice1).addInvoice(invoice2);
+
+			clientRepository.save(client);
+			System.out.println(client);
+		});
 	}
 
 	@Transactional
@@ -68,18 +86,23 @@ public class SpringbootJpaRelationshipApplication implements CommandLineRunner {
 			Address address1 = new Address("El Verjel", 1234);
 			Address address2 = new Address("Vasco de Gama", 9875);
 
-			client.setAddresses(Arrays.asList(address1, address2));
+			Set<Address> addresses = new HashSet<>();
+			addresses.add(address1);
+			addresses.add(address2);
+
+			client.setAddresses(addresses);
 
 			clientRepository.save(client);
 			System.out.println(client);
 
 			// Eliminando una dirección
-			Optional<Client> optionalClient2 = clientRepository.findOne(2L);
+			Optional<Client> optionalClient2 = clientRepository.findOneWithAddresses(2L);
 			// System.out.println(optionalClient2);
 
 			optionalClient2.ifPresent(c -> {
 				// Recogemos la dirección con id 2
-				Address address = c.getAddresses().get(1);
+				@SuppressWarnings("unchecked")
+				Address address = ((List<Address>) c.getAddresses()).get(1);
 				c.getAddresses().remove(address);
 				clientRepository.save(c);
 				System.out.println(c);
@@ -125,7 +148,11 @@ public class SpringbootJpaRelationshipApplication implements CommandLineRunner {
 			// list.add(address2);
 			// client.setAddresses(list);
 			// ES LO MISMO, PERO MÁS REDUCIDO
-			client.setAddresses(Arrays.asList(address1, address2));
+
+			Set<Address> addresses = new HashSet<>();
+			addresses.add(address1);
+			addresses.add(address2);
+			client.setAddresses(addresses);
 
 			clientRepository.save(client);
 			System.out.println(client);
