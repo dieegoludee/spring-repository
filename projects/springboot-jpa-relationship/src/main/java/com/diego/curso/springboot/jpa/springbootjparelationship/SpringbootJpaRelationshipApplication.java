@@ -35,7 +35,31 @@ public class SpringbootJpaRelationshipApplication implements CommandLineRunner {
 		// manyToOneCreate();
 		// manyToOneFindByIdClient();
 		// oneToManyCreate();
-		oneToManyFindByIdClient();
+		// oneToManyFindByIdClient();
+		removeAddress();
+	}
+
+	@Transactional
+	public void removeAddress() {
+		Client client = new Client("Fran", "Moras");
+
+		Address address1 = new Address("El Verjel", 1234);
+		Address address2 = new Address("Vasco de Gama", 9875);
+
+		client.getAddresses().add(address1);
+		client.getAddresses().add(address2);
+
+		clientRepository.save(client);
+		System.out.println(client);
+
+		// Eliminando una dirección
+		Optional<Client> optionalClient = clientRepository.findById(3L);
+		optionalClient.ifPresent(cli -> {
+			cli.getAddresses().remove(address1);
+			clientRepository.save(cli);
+			System.out.println(cli);
+		});
+
 	}
 
 	@Transactional
