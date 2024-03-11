@@ -16,7 +16,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.diego.curso.springboot.jpa.springbootjparelationship.entities.Address;
 import com.diego.curso.springboot.jpa.springbootjparelationship.entities.Client;
+import com.diego.curso.springboot.jpa.springbootjparelationship.entities.ClientDetails;
 import com.diego.curso.springboot.jpa.springbootjparelationship.entities.Invoice;
+import com.diego.curso.springboot.jpa.springbootjparelationship.repositories.ClientDetailsRepository;
 import com.diego.curso.springboot.jpa.springbootjparelationship.repositories.ClientRepository;
 import com.diego.curso.springboot.jpa.springbootjparelationship.repositories.InvoiceRepository;
 
@@ -28,6 +30,9 @@ public class SpringbootJpaRelationshipApplication implements CommandLineRunner {
 
 	@Autowired
 	private InvoiceRepository invoiceRepository;
+
+	@Autowired
+	private ClientDetailsRepository clientDetailsRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringbootJpaRelationshipApplication.class, args);
@@ -44,7 +49,38 @@ public class SpringbootJpaRelationshipApplication implements CommandLineRunner {
 		// oneToManyInvoiceBidireccional();
 		// oneToManyInvoiceBidireccionalFindById();
 		// removeInvoiceBidireccionalFindById();
-		removeInvoiceBidireccional();
+		// removeInvoiceBidireccional();
+		// oneToOne();
+		oneToOneFindById();
+	}
+
+	@Transactional
+	public void oneToOneFindById() {
+
+		ClientDetails clientDetails = new ClientDetails(true, 5000);
+		clientDetailsRepository.save(clientDetails);
+
+		Optional<Client> clientOptional = clientRepository.findOne(2L); // new Client("Erba", "Pura");
+		clientOptional.ifPresent(client -> {
+			client.setClientDetails(clientDetails);
+			clientRepository.save(client);
+
+			System.out.println(client);
+		});
+
+	}
+
+	@Transactional
+	public void oneToOne() {
+
+		ClientDetails clientDetails = new ClientDetails(true, 5000);
+		clientDetailsRepository.save(clientDetails);
+
+		Client client = new Client("Erba", "Pura");
+		client.setClientDetails(clientDetails);
+		clientRepository.save(client);
+
+		System.out.println(client);
 	}
 
 	@Transactional
