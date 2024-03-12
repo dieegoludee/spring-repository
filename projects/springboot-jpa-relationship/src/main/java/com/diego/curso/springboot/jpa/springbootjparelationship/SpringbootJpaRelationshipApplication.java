@@ -51,7 +51,34 @@ public class SpringbootJpaRelationshipApplication implements CommandLineRunner {
 		// removeInvoiceBidireccionalFindById();
 		// removeInvoiceBidireccional();
 		// oneToOne();
-		oneToOneFindById();
+		// oneToOneFindById();
+		// oneToOneBidireccional();
+		oneToOneBidireccionalFindById();
+	}
+
+	@Transactional
+	public void oneToOneBidireccionalFindById() {
+
+		Optional<Client> optionalClient = clientRepository.findOne(1L);
+		optionalClient.ifPresent(client -> {
+			ClientDetails clientDetails = new ClientDetails(true, 5000);
+			client.setClientDetails(clientDetails);
+			clientRepository.save(client);
+
+			System.out.println(client);
+		});
+	}
+
+	@Transactional
+	public void oneToOneBidireccional() {
+
+		Client client = new Client("Erba", "Pura");
+		ClientDetails clientDetails = new ClientDetails(true, 5000);
+
+		client.setClientDetails(clientDetails);
+
+		clientRepository.save(client);
+		System.out.println(client);
 	}
 
 	@Transactional
