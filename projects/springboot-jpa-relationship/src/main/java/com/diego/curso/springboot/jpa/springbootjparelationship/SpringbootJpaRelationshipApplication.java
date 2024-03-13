@@ -22,6 +22,7 @@ import com.diego.curso.springboot.jpa.springbootjparelationship.entities.Invoice
 import com.diego.curso.springboot.jpa.springbootjparelationship.entities.Student;
 import com.diego.curso.springboot.jpa.springbootjparelationship.repositories.ClientDetailsRepository;
 import com.diego.curso.springboot.jpa.springbootjparelationship.repositories.ClientRepository;
+import com.diego.curso.springboot.jpa.springbootjparelationship.repositories.CourseRepository;
 import com.diego.curso.springboot.jpa.springbootjparelationship.repositories.InvoiceRepository;
 import com.diego.curso.springboot.jpa.springbootjparelationship.repositories.StudentRepository;
 
@@ -39,6 +40,9 @@ public class SpringbootJpaRelationshipApplication implements CommandLineRunner {
 
 	@Autowired
 	private StudentRepository studentRepository;
+
+	@Autowired
+	private CourseRepository courseRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringbootJpaRelationshipApplication.class, args);
@@ -60,7 +64,92 @@ public class SpringbootJpaRelationshipApplication implements CommandLineRunner {
 		// oneToOneFindById();
 		// oneToOneBidireccional();
 		// oneToOneBidireccionalFindById();
-		manyToMany();
+		// manyToMany();
+		// manyToManyFind();
+		// manyToManyRemoveFind();
+		manyToManyRemove();
+	}
+
+	@SuppressWarnings("null")
+	@Transactional
+	public void manyToManyRemove() {
+		Student student1 = new Student("Diego", "Martin");
+		Student student2 = new Student("Jano", "Suarez");
+
+		Course course1 = new Course("Curso de Spring Boot 3", "Andres");
+		Course course2 = new Course("Curso de Java", "Andres");
+
+		student1.setCourses(Set.of(course1, course2)); // Creamos un Set para los 2 cursos
+		student2.setCourses(Set.of(course1)); // Creamos un Set para 1 curso
+
+		studentRepository.saveAll(Set.of(student1, student2));
+		System.out.println(student1);
+		System.out.println(student2);
+
+		Optional<Student> studentOptionalDb = studentRepository.findOneWithCourses(3L);
+		if (studentOptionalDb.isPresent()) {
+			Student studentDb = studentOptionalDb.orElseThrow();
+			Optional<Course> courseOptionalDb = courseRepository.findById(3L);
+
+			if (courseOptionalDb.isPresent()) {
+				Course courseDb = courseOptionalDb.orElseThrow();
+				studentDb.getCourses().remove(courseDb);
+
+				studentRepository.save(studentDb);
+				System.out.println(studentDb);
+			}
+		}
+	}
+
+	@SuppressWarnings("null")
+	@Transactional
+	public void manyToManyRemoveFind() {
+		Student student1 = studentRepository.findById(1L).orElseThrow(); // buscamos y obtenemos estudiante con id 1
+		Student student2 = studentRepository.findById(2L).orElseThrow(); // buscamos y obtenemos estudiante con id 2
+
+		Course course1 = courseRepository.findById(1L).orElseThrow(); // buscamos y obtenemos curso con id 1
+		Course course2 = courseRepository.findById(2L).orElseThrow(); // buscamos y obtenemos curso con id 2
+
+		student1.setCourses(Set.of(course1, course2)); // Creamos un Set para los 2 cursos
+		student2.setCourses(Set.of(course2)); // Creamos un Set para 1 curso
+
+		studentRepository.saveAll(Set.of(student1, student2)); // Creamos un set y añadimos los cursos
+		System.out.println(student1);
+		System.out.println(student2);
+
+		Optional<Student> studentOptionalDb = studentRepository.findOneWithCourses(1L);
+		if (studentOptionalDb.isPresent()) {
+			Student studentDb = studentOptionalDb.orElseThrow();
+			Optional<Course> courseOptionalDb = courseRepository.findById(2L);
+
+			if (courseOptionalDb.isPresent()) {
+				Course courseDb = courseOptionalDb.orElseThrow();
+				studentDb.getCourses().remove(courseDb);
+
+				studentRepository.save(studentDb);
+				System.out.println(studentDb);
+			}
+		}
+	}
+
+	@SuppressWarnings("null")
+	@Transactional
+	public void manyToManyFind() {
+		Optional<Student> studentOpt1 = studentRepository.findById(1L);
+		Optional<Student> studentOpt2 = studentRepository.findById(2L);
+
+		Student student1 = studentOpt1.orElseThrow(); // recibimos el estudiante
+		Student student2 = studentOpt2.orElseThrow();
+
+		Course course1 = courseRepository.findById(1L).orElseThrow();
+		Course course2 = courseRepository.findById(2L).orElseThrow();
+
+		student1.setCourses(Set.of(course1, course2)); // Creamos un Set para los 2 cursos
+		student2.setCourses(Set.of(course2)); // Creamos un Set para 1 curso
+
+		studentRepository.saveAll(Set.of(student1, student2));
+		System.out.println(student1);
+		System.out.println(student2);
 	}
 
 	@SuppressWarnings("null")
