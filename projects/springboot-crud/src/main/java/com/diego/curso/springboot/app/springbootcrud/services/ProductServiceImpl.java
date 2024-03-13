@@ -39,8 +39,25 @@ public class ProductServiceImpl implements ProductService {
   @SuppressWarnings("null")
   @Transactional
   @Override
-  public Optional<Product> delete(Product product) {
-    Optional<Product> productOptional = repository.findById(product.getId());
+  public Optional<Product> update(Long id, Product product) {
+    Optional<Product> productOptional = repository.findById(id);
+    if (productOptional.isPresent()) {
+      Product productDb = productOptional.orElseThrow();
+
+      productDb.setName(product.getName());
+      productDb.setPrice(product.getPrice());
+      productDb.setDescription(product.getDescription());
+
+      return Optional.of(repository.save(productDb));
+    }
+    return productOptional;
+  }
+
+  @SuppressWarnings("null")
+  @Transactional
+  @Override
+  public Optional<Product> delete(Long id) {
+    Optional<Product> productOptional = repository.findById(id);
     productOptional.ifPresent(productDb -> {
       repository.delete(productDb);
     });
