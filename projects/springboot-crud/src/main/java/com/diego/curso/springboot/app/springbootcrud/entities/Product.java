@@ -19,15 +19,16 @@ public class Product {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @NotEmpty
-  @Size(min = 3, max = 20)
+  @Size(min = 3, max = 20) // size min y max del name
+  @NotEmpty(message = "{NotEmpty.product.name}") // corresponde al messages.properties para mesajes de error
+                                                 // personalizados
   private String name;
 
-  @NotNull
-  @Min(500)
+  @NotNull(message = "{NotNull.product.price}")
+  @Min(message = "{Min.product.price}", value = 500) // min price
   private Integer price;
 
-  @NotBlank
+  @NotBlank(message = "{NotBlank.product.description}") // valida también que se añada solo un espacio
   private String description;
 
   public Long getId() {
