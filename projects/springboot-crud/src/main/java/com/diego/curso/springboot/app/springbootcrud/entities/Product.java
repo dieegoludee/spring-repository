@@ -1,5 +1,6 @@
 package com.diego.curso.springboot.app.springbootcrud.entities;
 
+import com.diego.curso.springboot.app.springbootcrud.validation.IsExistsDb;
 import com.diego.curso.springboot.app.springbootcrud.validation.IsRequired;
 
 import jakarta.persistence.Entity;
@@ -20,6 +21,10 @@ public class Product {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
+
+  @IsRequired
+  @IsExistsDb
+  private String sku;
 
   @Size(min = 3, max = 20) // size min y max del name
   @IsRequired(message = "{IsRequired.product.name}") // corresponde al messages.properties para mesajes de error
@@ -64,6 +69,14 @@ public class Product {
 
   public void setDescription(String description) {
     this.description = description;
+  }
+
+  public String getSku() {
+    return sku;
+  }
+
+  public void setSku(String sku) {
+    this.sku = sku;
   }
 
 }

@@ -6,4 +6,6 @@ import com.diego.curso.springboot.app.springbootcrud.entities.Product;
 
 public interface ProductRepository extends CrudRepository<Product, Long> {
 
+  boolean existsBySku(String sku);
+
 }
