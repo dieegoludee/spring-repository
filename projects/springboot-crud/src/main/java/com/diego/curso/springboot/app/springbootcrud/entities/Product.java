@@ -1,13 +1,15 @@
 package com.diego.curso.springboot.app.springbootcrud.entities;
 
+import com.diego.curso.springboot.app.springbootcrud.validation.IsRequired;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
+// import jakarta.validation.constraints.NotBlank;
+// import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
@@ -20,15 +22,16 @@ public class Product {
   private Long id;
 
   @Size(min = 3, max = 20) // size min y max del name
-  @NotEmpty(message = "{NotEmpty.product.name}") // corresponde al messages.properties para mesajes de error
-                                                 // personalizados
+  @IsRequired(message = "{IsRequired.product.name}") // corresponde al messages.properties para mesajes de error
+                                                     // personalizados
   private String name;
 
   @NotNull(message = "{NotNull.product.price}")
   @Min(message = "{Min.product.price}", value = 500) // min price
   private Integer price;
 
-  @NotBlank(message = "{NotBlank.product.description}") // valida también que se añada solo un espacio
+  @IsRequired // anotación personalizada que valida si el campo es nulo, vacío o con solo
+              // espacios en blanco
   private String description;
 
   public Long getId() {

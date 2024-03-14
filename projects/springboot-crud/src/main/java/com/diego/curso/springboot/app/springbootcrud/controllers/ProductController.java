@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.diego.curso.springboot.app.springbootcrud.ProductValidation;
+// import com.diego.curso.springboot.app.springbootcrud.validation.ProductValidation;
 import com.diego.curso.springboot.app.springbootcrud.entities.Product;
 import com.diego.curso.springboot.app.springbootcrud.services.ProductService;
 
@@ -31,8 +31,8 @@ public class ProductController {
   @Autowired
   private ProductService service;
 
-  @Autowired
-  private ProductValidation validation;
+  // @Autowired
+  // private ProductValidation validation;
 
   @GetMapping
   public List<Product> list() {
@@ -51,7 +51,7 @@ public class ProductController {
 
   @PostMapping
   public ResponseEntity<?> create(@Valid @RequestBody Product product, BindingResult bindingResult) {
-    validation.validate(product, bindingResult);
+    // validation.validate(product, bindingResult);
     if (bindingResult.hasFieldErrors()) {
       return validation(bindingResult);
     }
@@ -62,7 +62,7 @@ public class ProductController {
   public ResponseEntity<?> update(@Valid @RequestBody Product product, BindingResult bindingResult,
       @PathVariable Long id) {
 
-    validation.validate(product, bindingResult);
+    // validation.validate(product, bindingResult);
     if (bindingResult.hasFieldErrors()) {
       return validation(bindingResult);
     }
