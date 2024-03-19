@@ -17,5 +17,5 @@
 | `08`  | Spring Boot 3 - JPA e Hibernate  | [Ver](https://github.com/dieegoludee/spring-repository/tree/main/projects/springboot-jpa)  |
 | `09`  | Spring Boot 3 - JPA e Hibernate - Asociaciones  | [Ver](https://github.com/dieegoludee/spring-repository/tree/main/projects/springboot-jpa-relationship)  |
 | `10`  | Spring Boot 3 - Spring Web API RESTful - CRUD  | [Ver](https://github.com/dieegoludee/spring-repository/tree/main/projects/springboot-crud)  |
-| `11`  | Spring Boot 3 - Spring Web API RESTful CRUD - Backend Users Spring Security JWT  | [Ver](https://github.com/dieegoludee/spring-repository/tree/main/projects/springboot-crud-security)  |
+| `11`  | Spring Boot 3 - Spring Web API RESTful - CRUD Spring Security JWT  | [Ver](https://github.com/dieegoludee/spring-repository/tree/main/projects/springboot-crud-security)  |
 
