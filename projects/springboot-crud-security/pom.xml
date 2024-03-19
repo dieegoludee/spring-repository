@@ -12,7 +12,7 @@
 	<groupId>com.diego.curso.springboot.app</groupId>
 	<artifactId>springboot-crud-security</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>springboot-crud</name>
+	<name>springboot-crud-security</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>21</java.version>
