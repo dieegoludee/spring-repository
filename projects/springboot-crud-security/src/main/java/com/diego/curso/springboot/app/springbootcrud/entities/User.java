@@ -41,16 +41,16 @@ public class User {
       @UniqueConstraint(columnNames = { "user_id", "role_id" }) })
   private List<Role> roles;
 
-  @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
   private boolean enabled;
+
+  @Transient
+  @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+  private boolean admin; // No es un campo de persistencia, no está en la tabla
 
   @PrePersist
   public void prePersist() { // valor por defecto de enabled
     enabled = true;
   }
-
-  @Transient
-  private boolean admin; // No es un campo de persistencia, no está en la tabla
 
   public Long getId() {
     return id;
