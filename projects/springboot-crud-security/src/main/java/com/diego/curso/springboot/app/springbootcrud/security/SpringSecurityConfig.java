@@ -34,8 +34,17 @@ public class SpringSecurityConfig {
   @Bean
   SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     return http.authorizeHttpRequests((authz) -> authz
-        .requestMatchers(HttpMethod.GET, "/api/users").permitAll()
-        .requestMatchers(HttpMethod.POST, "/api/users/register").permitAll()
+        .requestMatchers(HttpMethod.GET, "/api/users").permitAll() // mostrar users para todos los roles
+        .requestMatchers(HttpMethod.GET, "/api/products", "/api/products/{id}").hasAnyRole("ADMIN", "USER")
+        .requestMatchers(HttpMethod.POST, "/api/users/register").permitAll() // crear user para todos los roles
+        .requestMatchers(HttpMethod.POST, "/api/users").hasRole("ADMIN") // crear user con rol de admin si solo tienen
+                                                                         // el rol de ADMIN
+        .requestMatchers(HttpMethod.POST, "/api/products").hasRole("ADMIN")// crear productos solo si tienen el rol de
+                                                                           // ADMIN
+        .requestMatchers(HttpMethod.PUT, "/api/products/{id}").hasRole("ADMIN") // modificar productos solo si tienen el
+                                                                                // rol de ADMIN
+        .requestMatchers(HttpMethod.DELETE, "/api/products/{id}").hasRole("ADMIN") // eliminar productos solo si tienen
+                                                                                   // rol de ADMIN
         .anyRequest().authenticated())
         .addFilter(new JwtAuthenticationFilter(authenticationManager()))
         .addFilter(new JwtValidationFilter(authenticationManager()))
