@@ -8,3 +8,20 @@
 <ng-template #notEnabled>
   <div>Lo sentimos, no está disponible</div>
 </ng-template>
+
+<ul *ngIf="enabled">
+  <li *ngFor="let course of courses">{{ course }}</li>
+</ul>
+
+<!--Angular 17 sintax-->
+
+@if (enabled) {
+<h2>{{ title }}</h2>
+<ul>
+  @for (course of courses; track $index) {
+  <li>{{ course }}</li>
+  }
+</ul>
+}@else {
+<div>Lo sentimos, no está disponible</div>
+}

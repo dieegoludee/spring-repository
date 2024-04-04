@@ -12,6 +12,7 @@ import { RouterOutlet } from '@angular/router';
 export class AppComponent {
   title: string = 'Hola mundo Angular 17';
   enabled: boolean = false;
+  courses: string[] = ['Angular', 'React', 'Spring Boot'];
 
   setEnabled(): void {
     this.enabled = this.enabled ? false : true;
