@@ -1,1 +1,27 @@
-<p>product works!</p>
+<h2>Listado de productos</h2>
+
+@if ( products.length > 0 ) {
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>NAME</th>
+      <th>DESCRIPTION</th>
+      <th>PRICE</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    @for (product of products; track $index) {
+    <tr>
+      <td>{{ product.id }}</td>
+      <td>{{ product.name }}</td>
+      <td>{{ product.description }}</td>
+      <td>{{ product.price }}</td>
+    </tr>
+    }
+  </tbody>
+</table>
+} @else {
+<div>Lo sentimos no hay registros en el sistema!</div>
+}
