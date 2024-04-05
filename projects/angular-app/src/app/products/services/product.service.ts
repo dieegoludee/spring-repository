@@ -14,7 +14,7 @@ export class ProductService {
       price: 700,
     },
     {
-      id: 1,
+      id: 2,
       name: 'Teclado mecánico',
       description: 'Excelente teclado para typing',
       price: 500,
