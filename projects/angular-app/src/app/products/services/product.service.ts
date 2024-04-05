@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Product } from '../models/product';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -21,4 +22,8 @@ export class ProductService {
   ];
 
   constructor() {}
+
+  findAll(): Observable<Product[]> {
+    return of(this.products); // la función of() convierte un objeto o array en un Observable.
+  }
 }
