@@ -22,7 +22,7 @@ export class ProductComponent implements OnInit {
     this.service.findAll().subscribe((products) => (this.products = products));
   }
 
-  addProduct(product: Product) {
+  addProduct(product: Product): void {
     if (product.id > 0) {
       this.products = this.products.map((prod) => {
         if (prod.id == product.id) {
@@ -38,9 +38,14 @@ export class ProductComponent implements OnInit {
         { ...product, id: this.products.length + 1 }, // new Date().getTime(); para id
       ]; // esta sería la forma inmutable, en angular se pueden hacer de ambas formas
     }
+    this.productSelected = new Product(); // para limpiar el form al crear o actualizar
   }
 
-  onUpdateProduct(productRow: Product) {
+  onUpdateProduct(productRow: Product): void {
     this.productSelected = productRow;
+  }
+
+  onRemoveProduct(id: number): void {
+    this.products = this.products.filter((product) => product.id != id);
   }
 }
