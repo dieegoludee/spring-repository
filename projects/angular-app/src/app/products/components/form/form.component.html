@@ -1,6 +1,7 @@
 <form (ngSubmit)="onSubmit()">
   <div>
     <input
+      class="form-control my-2"
       type="text"
       placeholder="Name"
       name="name"
@@ -9,6 +10,7 @@
   </div>
   <div>
     <input
+      class="form-control my-2"
       type="text"
       placeholder="Description"
       name="description"
@@ -17,6 +19,7 @@
   </div>
   <div>
     <input
+      class="form-control my-2"
       type="number"
       placeholder="Price"
       name="price"
@@ -24,6 +27,8 @@
     />
   </div>
   <div>
-    <button>{{ product.id > 0 ? "Actualizar" : "Crear" }}</button>
+    <button class="btn btn-primary my-2">
+      {{ product.id > 0 ? "Actualizar" : "Crear" }}
+    </button>
   </div>
 </form>
