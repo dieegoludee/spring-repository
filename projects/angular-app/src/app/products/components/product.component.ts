@@ -19,4 +19,13 @@ export class ProductComponent implements OnInit {
     // los products que llegan del backend se guardan en la variable this.products
     this.service.findAll().subscribe((products) => (this.products = products));
   }
+
+  addProduct(product: Product) {
+    // product.id = new Date().getTime();
+    // this.products.push(product);
+    this.products = [
+      ...this.products,
+      { ...product, id: new Date().getTime() },
+    ]; // esta sería la forma inmutable, en angular se pueden hacer de ambas formas
+  }
 }
