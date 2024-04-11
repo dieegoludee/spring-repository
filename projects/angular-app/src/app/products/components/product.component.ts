@@ -42,7 +42,7 @@ export class ProductComponent implements OnInit {
   }
 
   onUpdateProduct(productRow: Product): void {
-    this.productSelected = productRow;
+    this.productSelected = { ...productRow }; // clonamos con una nueva instancia para evitar la mutabilidad
   }
 
   onRemoveProduct(id: number): void {

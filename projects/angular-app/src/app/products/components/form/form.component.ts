@@ -25,4 +25,8 @@ export class FormComponent {
     this.newProductEvent.emit(this.product); // emitimos el producto del form
     console.log(this.product);
   }
+
+  clean(): void {
+    this.product = new Product();
+  }
 }

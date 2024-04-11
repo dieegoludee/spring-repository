@@ -27,8 +27,12 @@
     />
   </div>
   <div>
-    <button class="btn btn-primary my-2">
+    <button type="submit" class="btn btn-primary my-2">
       {{ product.id > 0 ? "Actualizar" : "Crear" }}
+    </button>
+
+    <button type="button" class="btn btn-success my-2 mx-2" (click)="clean()">
+      Clean
     </button>
   </div>
 </form>
