@@ -13,6 +13,8 @@ import { FormComponent } from './form/form.component';
 export class ProductComponent implements OnInit {
   products: Product[] = [];
 
+  productSelected: Product = new Product();
+
   constructor(private service: ProductService) {}
 
   ngOnInit(): void {
@@ -21,11 +23,24 @@ export class ProductComponent implements OnInit {
   }
 
   addProduct(product: Product) {
-    // product.id = new Date().getTime();
-    // this.products.push(product);
-    this.products = [
-      ...this.products,
-      { ...product, id: new Date().getTime() },
-    ]; // esta sería la forma inmutable, en angular se pueden hacer de ambas formas
+    if (product.id > 0) {
+      this.products = this.products.map((prod) => {
+        if (prod.id == product.id) {
+          return { ...product };
+        }
+        return prod;
+      });
+    } else {
+      // product.id = new Date().getTime();
+      // this.products.push(product);
+      this.products = [
+        ...this.products,
+        { ...product, id: this.products.length + 1 }, // new Date().getTime(); para id
+      ]; // esta sería la forma inmutable, en angular se pueden hacer de ambas formas
+    }
+  }
+
+  onUpdateProduct(productRow: Product) {
+    this.productSelected = productRow;
   }
 }

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Product } from '../../models/product';
 import { FormsModule } from '@angular/forms';
 
@@ -11,7 +11,8 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './form.component.css',
 })
 export class FormComponent {
-  product: Product = {
+  @Input() product: Product = {
+    // con Input pasamos info del padre al hijo
     id: 0,
     name: '',
     description: '',

@@ -1,15 +1,20 @@
 <h2>Listado de productos</h2>
 
-<product-form (newProductEvent)="addProduct($event)"></product-form>
+<product-form
+  (newProductEvent)="addProduct($event)"
+  [product]="productSelected"
+>
+</product-form>
 
 @if ( products.length > 0 ) {
 <table>
   <thead>
     <tr>
-      <th>ID</th>
-      <th>NAME</th>
-      <th>DESCRIPTION</th>
-      <th>PRICE</th>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Price</th>
+      <th>Update</th>
     </tr>
   </thead>
 
@@ -20,6 +25,7 @@
       <td>{{ product.name }}</td>
       <td>{{ product.description }}</td>
       <td>{{ product.price }}</td>
+      <td><button (click)="onUpdateProduct(product)">Update</button></td>
     </tr>
     }
   </tbody>
